@@ -10,6 +10,17 @@ The datasets used refer to real estate sales with a sales price of $2,000 or mor
 The dataset information was collected on April 8, 2026, the update March 19, 2026.
 The range for the sales ratio has been established between 0.7 and 1.1. The lower limit is set in accordance with ratio testing standards (https://eregulations.ct.gov/eRegsPortal/Browse/RCSA/Title_12Subtitle_12-62iSection_12-62i-3/), while the upper limit is arbitrary. Both limits include values raging between 70 and 110 percent of the sale amount.
 
+## Used tools
+
+■ Power BI Desktop
+
+■ Power Query
+
+■ DAX
+
+■ Fuente de datos (Excel/CSV)
+
+
 ## Data visualization
 
 The objective is to examine real estate sales in an attempt to understand the data pattern during the analyzed period. The following reports are included:
