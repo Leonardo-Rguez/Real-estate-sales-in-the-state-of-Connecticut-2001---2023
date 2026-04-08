@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "31f82eb793a3670f427b",
+  "position": {
+    "x": 173.02798015995444,
+    "y": 42.770961387853909,
+    "z": 4000,
+    "height": 60.268172864703232,
+    "width": 373.27384483945229,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Analysis by Town",
+                    "textStyle": {
+                      "fontFamily": "Arial Black",
+                      "fontSize": "24pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

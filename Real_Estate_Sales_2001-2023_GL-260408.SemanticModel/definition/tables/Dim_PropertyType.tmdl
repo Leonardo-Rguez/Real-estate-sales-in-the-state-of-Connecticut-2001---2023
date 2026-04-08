@@ -1,0 +1,43 @@
+table Dim_PropertyType
+	lineageTag: af9d5003-ec3d-497e-9d81-1e1722263d91
+
+	column 'Property Type'
+		dataType: string
+		lineageTag: 25c7f21d-8b7d-4a8f-b243-75860407689f
+		summarizeBy: none
+		sourceColumn: Property Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_PropertyType = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\240501 - EEUU\2026\260408 - Real_Estate_Sales\Real_Estate_Sales_2001-2023_GL_20260408.csv"),[Delimiter=",", Columns=14, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Serial Number", Int64.Type}, {"List Year", Int64.Type}, {"Date Recorded", type date}, {"Town", type text}, {"Address", type text}, {"Assessed Value", Int64.Type}, {"Sale Amount", Int64.Type}, {"Sales Ratio", type number}, {"Property Type", type text}, {"Residential Type", type text}, {"Non Use Code", type text}, {"Assessor Remarks", type text}, {"OPM remarks", type text}, {"Location", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Non Use Code", "Assessor Remarks", "OPM remarks", "Location"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Columns", each ([Town] <> "***Unknown***")),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Filtered Rows",{{"Town", Text.Proper, type text}}),
+				    #"Filtered Rows1" = Table.SelectRows(#"Capitalized Each Word", each true),
+				    #"Trimmed Text" = Table.TransformColumns(#"Filtered Rows1",{{"Town", Text.Trim, type text}}),
+				    #"Uppercased Text" = Table.TransformColumns(#"Trimmed Text",{{"Address", Text.Upper, type text}}),
+				    #"Trimmed Text1" = Table.TransformColumns(#"Uppercased Text",{{"Address", Text.Trim, type text}}),
+				    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text1",{{"Town", Text.Clean, type text}, {"Address", Text.Clean, type text}}),
+				    #"Rounded Off" = Table.TransformColumns(#"Cleaned Text",{{"Sales Ratio", each Number.Round(_, 4), type number}}),
+				    #"Capitalized Each Word1" = Table.TransformColumns(#"Rounded Off",{{"Property Type", Text.Proper, type text}}),
+				    #"Trimmed Text2" = Table.TransformColumns(#"Capitalized Each Word1",{{"Property Type", Text.Trim, type text}}),
+				    #"Cleaned Text1" = Table.TransformColumns(#"Trimmed Text2",{{"Property Type", Text.Clean, type text}}),
+				    #"Capitalized Each Word2" = Table.TransformColumns(#"Cleaned Text1",{{"Residential Type", Text.Proper, type text}}),
+				    #"Trimmed Text3" = Table.TransformColumns(#"Capitalized Each Word2",{{"Residential Type", Text.Trim, type text}}),
+				    #"Cleaned Text2" = Table.TransformColumns(#"Trimmed Text3",{{"Residential Type", Text.Clean, type text}}),
+				    PropertyType = Table.SelectColumns(#"Cleaned Text2",{"Property Type"}),
+				    #"Removed Duplicates" = Table.Distinct(PropertyType),
+				    Dim_PropertyType = Table.SelectRows(#"Removed Duplicates", each ([Property Type] <> ""))
+				in
+				    Dim_PropertyType
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

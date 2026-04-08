@@ -1,0 +1,177 @@
+table Fact_Real_Estate_Sales
+	lineageTag: fefda0b9-be80-42a4-896c-129b06a87a8f
+
+	column 'Serial Number'
+		dataType: int64
+		formatString: 0
+		lineageTag: f1c01bbf-a1d4-42d6-8f6a-0592bb1142be
+		summarizeBy: sum
+		sourceColumn: Serial Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'List Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: ca1cc974-76da-44fa-af5c-9e809ee2baa4
+		summarizeBy: sum
+		sourceColumn: List Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Recorded'
+		dataType: dateTime
+		formatString: dd-mmm-yy
+		lineageTag: 6af1af15-ceb4-4671-9b03-4e5f25cc8f66
+		summarizeBy: none
+		sourceColumn: Date Recorded
+
+		variation Variation
+			isDefault
+			relationship: 1d1ac441-262c-43fe-be4c-4d71a178d873
+			defaultHierarchy: LocalDateTable_83e20752-59ec-47ca-9dc0-5c6627679d75.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Town
+		dataType: string
+		lineageTag: 3c391040-301a-4fa5-8aab-acd8b6a5829b
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: Town
+
+		annotation SummarizationSetBy = Automatic
+
+	column Address
+		dataType: string
+		lineageTag: a75666d2-522f-4800-b667-2ef3c1406b27
+		dataCategory: Address
+		summarizeBy: none
+		sourceColumn: Address
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Assessed Value'
+		dataType: int64
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 63887607-3fa9-4e76-80c8-b0d14446aea7
+		summarizeBy: sum
+		sourceColumn: Assessed Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Sale Amount'
+		dataType: int64
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: eeeef539-898a-475e-9e9a-ec0ac37e1b2f
+		summarizeBy: sum
+		sourceColumn: Sale Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Sales Ratio'
+		dataType: double
+		formatString: 0.0000
+		lineageTag: 672023a6-06c7-467c-a43d-d2a8a4b60768
+		summarizeBy: sum
+		sourceColumn: Sales Ratio
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Property Type'
+		dataType: string
+		lineageTag: 113a13af-552a-4b7d-a45b-2d9bd926f7b9
+		summarizeBy: none
+		sourceColumn: Property Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Residential Type'
+		dataType: string
+		lineageTag: ed2421f7-8f03-4562-af57-c1b05f86e761
+		summarizeBy: none
+		sourceColumn: Residential Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column UniqueSalesID =
+			
+			Fact_Real_Estate_Sales[Serial Number] & " || " &
+			Fact_Real_Estate_Sales[Town] & " || " &
+			Fact_Real_Estate_Sales[Address] & " || " &
+			FORMAT(Fact_Real_Estate_Sales[Date Recorded], "yyyymmdd") & " || " &
+			 Fact_Real_Estate_Sales[Sale Amount] & " || " &
+			 Fact_Real_Estate_Sales[Sales Ratio]
+		lineageTag: da95a1b6-6596-443b-872a-188fbb2c4dd5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column FY
+		dataType: dateTime
+		formatString: yyyy
+		lineageTag: 748b2383-4bd2-4c93-b02b-5aaaea1f953e
+		summarizeBy: none
+		sourceColumn: FY
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Sales Ratio Group' = ```
+			
+			SWITCH(
+			    TRUE(),
+			    Fact_Real_Estate_Sales[Sales Ratio] <= 0.6999, "Underassessed",
+			    Fact_Real_Estate_Sales[Sales Ratio] >= 0.7 && Fact_Real_Estate_Sales[Sales Ratio] <= 1.1, "Acceptable, 0.7-1.1",
+			    Fact_Real_Estate_Sales[Sales Ratio] >= 1.1001 && Fact_Real_Estate_Sales[Sales Ratio] <=2.0001, "Soverassessed", 
+			    "Extreme Outliers"
+			)
+			```
+		lineageTag: 7dfd5a56-d13f-4069-babe-b40fd621ca71
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fact_Real_Estate_Sales = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\240501 - EEUU\2026\260408 - Real_Estate_Sales\Real_Estate_Sales_2001-2023_GL_20260408.csv"),[Delimiter=",", Columns=14, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Serial Number", Int64.Type}, {"List Year", Int64.Type}, {"Date Recorded", type date}, {"Town", type text}, {"Address", type text}, {"Assessed Value", Int64.Type}, {"Sale Amount", Int64.Type}, {"Sales Ratio", type number}, {"Property Type", type text}, {"Residential Type", type text}, {"Non Use Code", type text}, {"Assessor Remarks", type text}, {"OPM remarks", type text}, {"Location", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Non Use Code", "Assessor Remarks", "OPM remarks", "Location"}),
+				    #"Equal=Unknown" = Table.SelectRows(#"Removed Columns", each ([Town] <> "***Unknown***")),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Equal=Unknown",{{"Town", Text.Proper, type text}}),
+				    #"Filtered Rows1" = Table.SelectRows(#"Capitalized Each Word", each true),
+				    #"Trimmed Text" = Table.TransformColumns(#"Filtered Rows1",{{"Town", Text.Trim, type text}}),
+				    #"Uppercased Text" = Table.TransformColumns(#"Trimmed Text",{{"Address", Text.Upper, type text}}),
+				    #"Trimmed Text1" = Table.TransformColumns(#"Uppercased Text",{{"Address", Text.Trim, type text}}),
+				    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text1",{{"Town", Text.Clean, type text}, {"Address", Text.Clean, type text}}),
+				    #"Rounded Off" = Table.TransformColumns(#"Cleaned Text",{{"Sales Ratio", each Number.Round(_, 4), type number}}),
+				    #"Capitalized Each Word1" = Table.TransformColumns(#"Rounded Off",{{"Property Type", Text.Proper, type text}}),
+				    #"Trimmed Text2" = Table.TransformColumns(#"Capitalized Each Word1",{{"Property Type", Text.Trim, type text}}),
+				    #"Cleaned Text1" = Table.TransformColumns(#"Trimmed Text2",{{"Property Type", Text.Clean, type text}}),
+				    #"Capitalized Each Word2" = Table.TransformColumns(#"Cleaned Text1",{{"Residential Type", Text.Proper, type text}}),
+				    #"Trimmed Text3" = Table.TransformColumns(#"Capitalized Each Word2",{{"Residential Type", Text.Trim, type text}}),
+				    #"Cleaned Text2" = Table.TransformColumns(#"Trimmed Text3",{{"Residential Type", Text.Clean, type text}}),
+				    #">=2000" = Table.SelectRows(#"Cleaned Text2", each [Sale Amount] >= 2000),
+				    FY = Table.AddColumn(#">=2000", "FY", each #date([List Year],12,31)),
+				    #"Changed Type1" = Table.TransformColumnTypes(FY,{{"FY", type date}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

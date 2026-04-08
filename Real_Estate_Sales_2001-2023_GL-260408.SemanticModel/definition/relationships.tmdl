@@ -1,0 +1,21 @@
+relationship AutoDetected_f812fff7-3801-461e-98fe-c292df2c5399
+	fromColumn: Fact_Real_Estate_Sales.Town
+	toColumn: Dim_Town.Town
+
+relationship 87dc3655-2596-7556-eb7b-9682aaa2242d
+	fromColumn: Fact_Real_Estate_Sales.'Residential Type'
+	toColumn: Dim_ResidentialType.'Residential Type'
+
+relationship 13f09146-ff3d-c9c8-9299-081a8df6d556
+	fromColumn: Fact_Real_Estate_Sales.'Property Type'
+	toColumn: Dim_PropertyType.'Property Type'
+
+relationship 1d1ac441-262c-43fe-be4c-4d71a178d873
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Fact_Real_Estate_Sales.'Date Recorded'
+	toColumn: LocalDateTable_83e20752-59ec-47ca-9dc0-5c6627679d75.Date
+
+relationship 22e87c14-95d0-3f56-cbc3-b657165fa070
+	fromColumn: Fact_Real_Estate_Sales.FY
+	toColumn: Calendar.Date
+

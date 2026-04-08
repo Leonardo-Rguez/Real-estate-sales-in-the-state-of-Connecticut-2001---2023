@@ -1,0 +1,27 @@
+table Calendar
+	lineageTag: 622e9b01-74ff-451e-b40e-017410d21d3a
+	dataCategory: Time
+
+	column Date
+		isKey
+		formatString: yyyy
+		lineageTag: 01dc613b-c332-43e5-8f10-88613fc86921
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	partition Calendar = calculated
+		mode: import
+		source =
+				
+				CALENDAR(
+				    DATE(2000,1,31),
+				    DATE(2023,12,31)
+				)
+
+	annotation PBI_Id = d37aae3e282446099cdee19f6c258c85
+

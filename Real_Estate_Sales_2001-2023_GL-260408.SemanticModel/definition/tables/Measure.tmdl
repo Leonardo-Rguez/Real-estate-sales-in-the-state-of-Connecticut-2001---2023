@@ -1,0 +1,241 @@
+table Measure
+	lineageTag: 7ac63de8-ccba-4384-a73c-1fb7117deef2
+
+	measure 'Total Sales Amount' =
+			
+			SUM(Fact_Real_Estate_Sales[Sale Amount])
+		formatString: #,0
+		lineageTag: 3d9ea211-d2d4-4f86-a9c4-8b5e13e30f93
+
+	measure 'Median Price' = ```
+			
+			CALCULATE(
+			    MEDIAN(Fact_Real_Estate_Sales[Sale Amount]),
+			    Fact_Real_Estate_Sales[Sales Ratio] >= 0.7 && Fact_Real_Estate_Sales[Sales Ratio] <= 1.1,
+			    Fact_Real_Estate_Sales[Assessed Value] <> 0
+			)
+			
+			```
+		lineageTag: 002bdb9f-e9ef-4dd5-8ca1-5013e65145f4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Real Estate Sales' =
+			
+			COUNT(Fact_Real_Estate_Sales[UniqueSalesID])
+		formatString: 0
+		lineageTag: fa0cc5d3-a11a-4c30-be64-64c4767ae140
+
+	measure 'Property Type Qty' =
+			
+			CALCULATE(
+			    COUNTX(Fact_Real_Estate_Sales,Fact_Real_Estate_Sales[Property Type])
+			)
+		formatString: 0
+		lineageTag: 71d2c1c0-654f-445a-b4ca-f6c93784600c
+
+	measure 'Sale Amount YoY' =
+			
+			CALCULATE(
+			    [Total Sales Amount],
+			        SAMEPERIODLASTYEAR(Fact_Real_Estate_Sales[FY])
+			)
+		formatString: 0
+		lineageTag: 94661480-4b81-4e46-9b26-665b57e3d943
+
+	measure 'Growth Sale Amount YoY' =
+			
+			CALCULATE(
+			    [Total Sales Amount] - [Sale Amount YoY]
+			)
+		formatString: 0
+		lineageTag: 8a6c8684-914f-4986-93a7-06fc119bfa12
+
+	measure '% Growth Sale Amount YoY' =
+			
+			CALCULATE(
+			    DIVIDE(
+			        [Total Sales Amount] - [Sale Amount YoY],[Sale Amount YoY])
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: d505e4b4-1496-41db-9d4e-de0c6888301a
+
+	measure 'Real Estate YoY' =
+			
+			CALCULATE(
+			    [Total Real Estate Sales],
+			    SAMEPERIODLASTYEAR(Fact_Real_Estate_Sales[FY])
+			)
+		formatString: 0
+		lineageTag: f9cc9066-befb-4580-812f-0799490247e3
+
+	measure 'Growth Real Estate YoY' =
+			
+			[Total Real Estate Sales] - [Real Estate YoY]
+		formatString: 0
+		lineageTag: f1a3bbf2-cbc4-471a-afca-fd8777cb3e8d
+
+	measure 'Global Median Sales Ratio' = ```
+			
+			CALCULATE(
+			    MEDIAN(Fact_Real_Estate_Sales[Sales Ratio]),
+			    Fact_Real_Estate_Sales[Assessed Value] <> 0
+			)
+			
+			```
+		formatString: #,0.0000
+		lineageTag: 5c852190-2e52-405b-9f90-fbcc89a80e16
+
+	measure '% Growth Real Estate YoY' =
+			
+			CALCULATE(
+			    DIVIDE(
+			        [Growth Real Estate YoY],[Real Estate YoY])
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 74cda6ed-cd89-42e4-b018-e89f95306a77
+
+	measure 'Global Median Price CT' = ```
+			
+			CALCULATE(
+			    MEDIAN(Fact_Real_Estate_Sales[Sale Amount]),
+			    Fact_Real_Estate_Sales[Assessed Value] <> 0
+			)
+			
+			```
+		lineageTag: 57d2e3ec-b806-4905-be64-ee0aa3029917
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Median Price Single Family' =
+			
+			CALCULATE(
+			    MEDIAN(Fact_Real_Estate_Sales[Sale Amount]),
+			    Fact_Real_Estate_Sales[Sales Ratio] >= 0.7 && Fact_Real_Estate_Sales[Sales Ratio] <= 1.1,
+			    Fact_Real_Estate_Sales[Assessed Value] <> 0,
+			    Fact_Real_Estate_Sales[Property Type] = "Single Family"
+			)
+		lineageTag: 099135d9-9d97-4bb1-91f6-a207d9ca9f18
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Median Price Two Family' =
+			
+			CALCULATE(
+			    MEDIAN(Fact_Real_Estate_Sales[Sale Amount]),
+			    Fact_Real_Estate_Sales[Sales Ratio] >= 0.7 && Fact_Real_Estate_Sales[Sales Ratio] <= 1.1,
+			    Fact_Real_Estate_Sales[Assessed Value] <> 0,
+			    Fact_Real_Estate_Sales[Property Type] = "Two Family"
+			)
+		lineageTag: 83309bc8-fb49-4c12-83d9-c36a73bf56d9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Median Price Three Family' =
+			
+			CALCULATE(
+			    MEDIAN(Fact_Real_Estate_Sales[Sale Amount]),
+			    Fact_Real_Estate_Sales[Sales Ratio] >= 0.7 && Fact_Real_Estate_Sales[Sales Ratio] <= 1.1,
+			    Fact_Real_Estate_Sales[Assessed Value] <> 0,
+			    Fact_Real_Estate_Sales[Property Type] = "Three Family"
+			)
+		lineageTag: 5fdc32c3-ff56-491a-b013-6c1986ebb5d9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Median Price Four Family' =
+			
+			CALCULATE(
+			    MEDIAN(Fact_Real_Estate_Sales[Sale Amount]),
+			    Fact_Real_Estate_Sales[Sales Ratio] >= 0.7 && Fact_Real_Estate_Sales[Sales Ratio] <= 1.1,
+			    Fact_Real_Estate_Sales[Assessed Value] <> 0,
+			    Fact_Real_Estate_Sales[Property Type] = "Four Family"
+			)
+		lineageTag: 53cb05f9-4059-424d-8cb3-4fb099cc8ebf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Median Price Condo' =
+			
+			CALCULATE(
+			    MEDIAN(Fact_Real_Estate_Sales[Sale Amount]),
+			    Fact_Real_Estate_Sales[Sales Ratio] >= 0.7 && Fact_Real_Estate_Sales[Sales Ratio] <= 1.1,
+			    Fact_Real_Estate_Sales[Assessed Value] <> 0,
+			    Fact_Real_Estate_Sales[Property Type] = "Condo"
+			)
+		lineageTag: d50efaa8-65a8-4a7c-ad88-456e4c874c09
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Median Price Residential' =
+			
+			CALCULATE(
+			    MEDIAN(Fact_Real_Estate_Sales[Sale Amount]),
+			    Fact_Real_Estate_Sales[Sales Ratio] >= 0.7 && Fact_Real_Estate_Sales[Sales Ratio] <= 1.1,
+			    Fact_Real_Estate_Sales[Assessed Value] <> 0,
+			    Fact_Real_Estate_Sales[Property Type] = "Residential"
+			)
+		lineageTag: c4912345-38fa-4676-b453-5493e6673ee9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Median Price Commercial' =
+			
+			CALCULATE(
+			    MEDIAN(Fact_Real_Estate_Sales[Sale Amount]),
+			    Fact_Real_Estate_Sales[Sales Ratio] >= 0.7 && Fact_Real_Estate_Sales[Sales Ratio] <= 1.1,
+			    Fact_Real_Estate_Sales[Assessed Value] <> 0,
+			    Fact_Real_Estate_Sales[Property Type] = "Commercial"
+			)
+		lineageTag: 71a723f7-baf1-454d-ae4a-d4684b0a2e62
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Median Price Vacant Land' =
+			
+			CALCULATE(
+			    MEDIAN(Fact_Real_Estate_Sales[Sale Amount]),
+			    Fact_Real_Estate_Sales[Sales Ratio] >= 0.7 && Fact_Real_Estate_Sales[Sales Ratio] <= 1.1,
+			    Fact_Real_Estate_Sales[Assessed Value] <> 0,
+			    Fact_Real_Estate_Sales[Property Type] = "Vacant Land"
+			)
+		lineageTag: 6dcdefd5-0613-4171-8d28-f910754e8c23
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Median Price Public Utility' =
+			
+			CALCULATE(
+			    MEDIAN(Fact_Real_Estate_Sales[Sale Amount]),
+			    Fact_Real_Estate_Sales[Sales Ratio] >= 0.7 && Fact_Real_Estate_Sales[Sales Ratio] <= 1.1,
+			    Fact_Real_Estate_Sales[Assessed Value] <> 0,
+			    Fact_Real_Estate_Sales[Property Type] = "Public Utility"
+			)
+		lineageTag: e6ccbbb5-0f49-47a5-9fd7-95fba50b5505
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Median Price Apartments' =
+			
+			CALCULATE(
+			    MEDIAN(Fact_Real_Estate_Sales[Sale Amount]),
+			    Fact_Real_Estate_Sales[Sales Ratio] >= 0.7 && Fact_Real_Estate_Sales[Sales Ratio] <= 1.1,
+			    Fact_Real_Estate_Sales[Assessed Value] <> 0,
+			    Fact_Real_Estate_Sales[Property Type] = "Apartments"
+			)
+		lineageTag: 29c9e21a-72b3-4b8e-9697-41fe19e8aade
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Measure = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

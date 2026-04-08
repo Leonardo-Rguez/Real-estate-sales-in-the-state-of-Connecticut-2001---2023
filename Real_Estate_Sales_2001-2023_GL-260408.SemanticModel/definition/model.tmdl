@@ -1,0 +1,25 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Fact_Real_Estate_Sales","Dim_Town","Dim_PropertyType","Dim_ResidentialType","Measure"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Fact_Real_Estate_Sales
+ref table Dim_Town
+ref table Dim_PropertyType
+ref table Dim_ResidentialType
+ref table Measure
+ref table DateTableTemplate_48b84aab-b612-4b67-8923-70c607e51d4d
+ref table LocalDateTable_83e20752-59ec-47ca-9dc0-5c6627679d75
+ref table Calendar
+
+ref cultureInfo en-US
+

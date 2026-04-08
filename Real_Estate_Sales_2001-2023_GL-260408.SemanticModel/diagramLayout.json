@@ -1,0 +1,99 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 244.0941094791188,
+        "y": 313.68234477323642
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 626.19249739646909,
+            "y": 332.96718845367428
+          },
+          "nodeIndex": "Dim_PropertyType",
+          "nodeLineageTag": "af9d5003-ec3d-497e-9d81-1e1722263d91",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 12.512500000000003,
+            "y": 667.66970615386958
+          },
+          "nodeIndex": "Dim_ResidentialType",
+          "nodeLineageTag": "d4cdb4c1-68fd-475f-8232-76ffd9e8440f",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 206.0296875
+          },
+          "nodeIndex": "Dim_Town",
+          "nodeLineageTag": "dcfe2b00-3659-41c0-b971-13bf9b1ece6c",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 253.7625,
+            "y": 341.51718845367429
+          },
+          "nodeIndex": "Fact_Real_Estate_Sales",
+          "nodeLineageTag": "fefda0b9-be80-42a4-896c-129b06a87a8f",
+          "size": {
+            "height": 305,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 551.879997396469,
+            "y": 595.22968940734859
+          },
+          "nodeIndex": "Measure",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 413.10498871803281,
+            "y": 153.67157182693478
+          },
+          "nodeIndex": "Calendar",
+          "nodeLineageTag": "622e9b01-74ff-451e-b40e-017410d21d3a",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 5
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 74.72527472527473,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

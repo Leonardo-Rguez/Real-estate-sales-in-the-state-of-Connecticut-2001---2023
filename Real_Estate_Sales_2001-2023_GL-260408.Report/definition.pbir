@@ -1,0 +1,8 @@
+{
+  "version": "4.0",
+  "datasetReference": {
+    "byPath": {
+      "path": "../Real_Estate_Sales_2001-2023_GL-260408.SemanticModel"
+    }
+  }
+}
