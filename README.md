@@ -20,6 +20,18 @@ The range for the sales ratio has been established between 0.7 and 1.1. The lowe
 
 ■ Fuente de datos (Excel/CSV)
 
+### Executive Summary
+
+The dataset presents real estate sales in 169 municipalities in the state of Connecticut between fiscal years 2001 and 2023. A total of 1,139,582 real estate sales were recorded, totaling $468,620,316,775.
+
+■	Both the total volume of real estate sales and the total value of those sales reached two significant peaks: (1) 2004 (83,433 sales and $32 billion) and (2) 2020 (66,592 sales and $40.3 billion). These data suggest that the median price of all properties in 2020 was higher, given that a greater total sales value was recorded despite a smaller number of units having been sold.
+
+■	The town with the highest total sales volume is Greenwich, with $41 billion and 19,267 properties—suggesting, it would seem that median property prices are higher. The town with the lowest total sales volume is Union, with $59 million and 294 properties; this indicates that its real estate market is the least active in the state.
+
+■	Regarding the year-on-year growth of the real estate sector—given that the sales ratio falls between 0.7 and 1.1—one could infer that the real estate market remained relatively stable between 2002 and 2023 (fluctuating between -26.94% and 30.36%). However, the growth in sales volume does not appear as stable (fluctuating between -33.1% and 62.6%).
+
+■	The property type with the highest median price between 2006 and 2019 is single-family, at $239,000.
+
 
 ## Data visualization
 
