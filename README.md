@@ -8,7 +8,7 @@ The datasets used refer to real estate sales with a sales price of $2,000 or mor
 ## The dataset
 
 The dataset information was collected on April 8, 2026, the update March 19, 2026.
-The range for the sales ratio has been established between 0.7 and 1.2. The lower limit is set in accordance with ratio testing standards (https://eregulations.ct.gov/eRegsPortal/Browse/RCSA/Title_12Subtitle_12-62iSection_12-62i-3/), while the upper limit is arbitrary. Both limits include values raging between 70 and 120 percent of the sale amount.
+The range for the sales ratio has been established between 0.5 and 1.2. The lower limit is set in accordance with ratio testing standards (https://eregulations.ct.gov/eRegsPortal/Browse/RCSA/Title_12Subtitle_12-62iSection_12-62i-3/), while the upper limit is arbitrary. Both limits include values raging between 70 and 120 percent of the sale amount.
 
 ## Used tools
 
@@ -28,9 +28,9 @@ The dataset presents real estate sales in 169 municipalities in the state of Con
 
 ■	The town with the highest total sales volume is Greenwich, with $41 billion and 19,267 properties—suggesting, it would seem that median property prices are higher. The town with the lowest total sales volume is Union, with $59 million and 294 properties; this indicates that its real estate market is the least active in the state.
 
-■	Regarding the year-on-year growth of the real estate sector—given that the sales ratio falls between 0.7 and 1.1—one could infer that the real estate market remained relatively stable between 2002 and 2023 (fluctuating between -26.94% and 30.36%). However, the growth in sales volume does not appear as stable (fluctuating between -33.1% and 62.6%).
+■	Regarding the year-on-year growth of the real estate sector one could infer that the real estate market remained relatively stable between 2002 and 2023 (fluctuating between -26.94% and 30.36%). However, the growth in sales volume does not appear as stable (fluctuating between -33.1% and 62.6%).
 
-■	The property type with the highest median price between 2006 and 2019 is single-family, at $239,000.
+■	The property type with the highest median price between 2006 and 2019 is single-family, at $266,993.
 
 
 ## Data visualization
@@ -73,7 +73,7 @@ All sales greater than or equal to $2000.00 in the 169 cities in the database ar
 
 6.	The sales ratio ranges are shown :
 
-     ■ Acceptable (0.7 - 1.2): 704632 (61.8%)
+     ■ Acceptable (0.5 - 1.2): 704632 (61.8%)
      
      ■ Underassessed (<=0.4999): 339474 (29.8%)
        
@@ -88,13 +88,13 @@ All sales greater than or equal to $2000.00 in the 169 cities in the database ar
 <img width="802" height="450" alt="image" src="https://github.com/user-attachments/assets/84f9e8cb-9592-4e98-97c7-917c87930307" />
 
 
-1.	Median price vs. fiscal year chart: the sales ratio value, falls between >= 0.7 and <= 1.1:
+1.	Median price vs. fiscal year chart: the sales ratio value, falls between >= 0.5 and <= 1.2:
 
 ■ A peak is recorded in 2006, when the median price reached $290,000. This coincides with the US housing bubble, which affected more than half of the states. Housing prices peaked in early 2006 ( https://es.wikipedia.org/wiki/Burbuja_inmobiliaria_de_los_Estados_Unidos ). The same source indicates that new lows were reached in 2012. In this dataset, the lowest price appears in 2015, perhaps due to: (1) the use the median in the calculation, (2) limiting the sales ratio to a specific range, or (3) that fact the price behaved differently in that state.
 
 ■ Starting in 2017, the median price continued to rise until the last year of the dataset.
 
-2.	Graph of total sales amount and median sales ratio vs. fiscal year. The sales ratio value is between >= 0.7 and <= 1.1.
+2.	Graph of total sales amount and median sales ratio vs. fiscal year. The sales ratio value is between >= 0.5 and <= 1.2.
 
 ■	Years 2009 – 2016. The median of sales ratio is between 0.7580 – 0.7133
 
@@ -149,7 +149,7 @@ The most significant periods:
 
 ### V.	Property Type
 
-All median prices for Sales ratio are between 0.7 – 1.1.
+All median prices for Sales ratio are between 0.5 – 1.2.
 
 ■	Single Family. The highest median price between 2006 and 2019 ($239900).
 
