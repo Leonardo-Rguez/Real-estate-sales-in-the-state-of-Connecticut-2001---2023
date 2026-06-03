@@ -8,7 +8,7 @@ The datasets used refer to real estate sales with a sales price of $2,000 or mor
 ## The dataset
 
 The dataset information was collected on April 8, 2026, the update March 19, 2026.
-The range for the sales ratio has been established between 0.7 and 1.1. The lower limit is set in accordance with ratio testing standards (https://eregulations.ct.gov/eRegsPortal/Browse/RCSA/Title_12Subtitle_12-62iSection_12-62i-3/), while the upper limit is arbitrary. Both limits include values raging between 70 and 110 percent of the sale amount.
+The range for the sales ratio has been established between 0.7 and 1.2. The lower limit is set in accordance with ratio testing standards (https://eregulations.ct.gov/eRegsPortal/Browse/RCSA/Title_12Subtitle_12-62iSection_12-62i-3/), while the upper limit is arbitrary. Both limits include values raging between 70 and 120 percent of the sale amount.
 
 ## Used tools
 
@@ -38,9 +38,13 @@ The dataset presents real estate sales in 169 municipalities in the state of Con
 The objective is to examine real estate sales in an attempt to understand the data pattern during the analyzed period. The following reports are included:
 
 I.	Overview
+
 II.	Trends
-III.	Analysis by Town
+
+III. Analysis by Town
+
 IV.	Growth
+
 V.	Property Type
 
 ## Insight
@@ -69,12 +73,12 @@ All sales greater than or equal to $2000.00 in the 169 cities in the database ar
 
 6.	The sales ratio ranges are shown :
 
-     ■ Underassessed (<= 0.6999): 759200 (66.6%)
+     ■ Acceptable (0.7 - 1.2): 704632 (61.8%)
      
-     ■ Acceptable (0.70 – 1.10): 267460 (23.5%)
+     ■ Underassessed (<=0.4999): 339474 (29.8%)
        
-     ■ Soverassessed (1.1001 – 2.0001): 71890 (6.3%)
-     
+     ■ Soverassessed (1.2 – 2.0001): 54484 (4.8%)
+  	
      ■ Extreme outliers (2.0002-6343.0567): 41032 (3.6%)
 
 
